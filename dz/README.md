@@ -19,37 +19,93 @@ testServer2- 10.10.10.1
 -----------
 ![](topology.jpeg)
 
+VLAN
+----
 
+Настроим vlan интерфейсы testClient1 <-> testServer1 testClient2 <-> testServer2.
 
+<details>
+  <summary>testClient1</summary>
 
+```
+[root@testClient1 ~]# cat /etc/sysconfig/network-scripts/ifcfg-vlan10
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+ONBOOT=yes
+TYPE=Vlan
+VLAN=yes
+VLAN_NAME_TYPE=VLAN_PLUS_VID_NO_PAD
+DEVICE=vlan10
+PHYSDEV=eth1
+VLAN_ID=10
+BOOTPROTO=static
+IPADDR=10.10.10.254
+NETMASK=255.255.255.0
+```
+</details>
 
-Role Variables
---------------
+<details>
+  <summary>testServer1</summary>
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+```
+[root@testServer1 ~]# cat /etc/sysconfig/network-scripts/ifcfg-vlan10
 
-Dependencies
-------------
+ONBOOT=yes
+TYPE=Vlan
+VLAN=yes
+VLAN_NAME_TYPE=VLAN_PLUS_VID_NO_PAD
+DEVICE=vlan10
+PHYSDEV=eth1
+VLAN_ID=10
+BOOTPROTO=static
+IPADDR=10.10.10.1
+NETMASK=255.255.255.0
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+```
+</details>
 
-Example Playbook
-----------------
+<details>
+  <summary>testClient2</summary>
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```
+[root@testClient2 ~]# cat /etc/sysconfig/network-scripts/ifcfg-vlan20 
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+ONBOOT=yes
+TYPE=Vlan
+VLAN=yes
+VLAN_NAME_TYPE=VLAN_PLUS_VID_NO_PAD
+DEVICE=vlan20
+PHYSDEV=eth1
+VLAN_ID=20
+BOOTPROTO=static
+IPADDR=10.10.10.254
+NETMASK=255.255.255.0
+```
+</details>
 
-License
--------
+<details>
+  <summary>testServer2</summary>
 
-BSD
+```
+[root@testServer2 ~]# cat /etc/sysconfig/network-scripts/ifcfg-vlan20
 
-Author Information
-------------------
+ONBOOT=yes
+TYPE=Vlan
+VLAN=yes
+VLAN_NAME_TYPE=VLAN_PLUS_VID_NO_PAD
+DEVICE=vlan20
+PHYSDEV=eth1
+VLAN_ID=20
+BOOTPROTO=static
+IPADDR=10.10.10.1
+NETMASK=255.255.255.0
+```
+</details>
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Разделенная локальная сеть, не конфлектует между собой.
+
+LACP
+----
+
+Для проверки отключим один из интерфейсов и убедимся, что доступ к хосту не изменилась.
+
+![](1.jpeg)

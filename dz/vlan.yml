@@ -1,13 +1,19 @@
 ---
 
-- name: Configuration networs
-  hosts: vlan
+- name: Configuration vlan
+  hosts:
+    - testServer1
+    - testClient1
+    - testServer2
+    - testClient2
   become: true
   roles:
     - vlan
 
-- name: Configuration networs
-  hosts: lacp
+- name: Configuration lacp
+  hosts: 
+    - centralRouter
+    - inetRouter
   become: true
   roles:
     - lacp
