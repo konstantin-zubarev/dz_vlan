@@ -1,10 +1,27 @@
-Role Name
-=========
+Стенд для настройки VLAN & LACP.
+================================
 
-A brief description of the role goes here.
+Цель:
 
-Requirements
-------------
+Строим бонды и вланы
+
+в Office1 в тестовой подсети появляется сервера с доп интерфесами и адресами в internal сети testLAN
+
+testClient1 - 10.10.10.254
+testClient2 - 10.10.10.254
+testServer1- 10.10.10.1
+testServer2- 10.10.10.1
+равести вланами testClient1 <-> testServer1 testClient2 <-> testServer2
+
+между centralRouter и inetRouter "пробросить" 2 линка (общая inernal сеть) и объединить их в бонд проверить работу c отключением интерфейсов
+
+Реализация.
+-----------
+![](topology.jpeg)
+
+
+
+
 
 Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
 
