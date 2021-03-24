@@ -1,0 +1,10 @@
+ONBOOT=yes
+TYPE=Vlan
+VLAN=yes
+VLAN_NAME_TYPE=VLAN_PLUS_VID_NO_PAD
+DEVICE=vlan{{ vlan }}
+PHYSDEV={{ device }}
+VLAN_ID={{ vlan }}
+BOOTPROTO=static
+IPADDR={{ vlan_ip }}
+NETMASK={{ vlan_netmask }}

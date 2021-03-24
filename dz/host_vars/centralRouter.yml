@@ -1,0 +1,12 @@
+---
+device1: 'eth1'
+
+device2: 'eth2'
+
+device_lacp: 'bond0'
+
+vlan_lacp_ip: '10.0.0.2'
+vlan_lacp_netmask: '255.255.255.252'
+vlan_lacp_gateway: '10.0.0.1'
+
+default: 'default-information originate'

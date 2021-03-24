@@ -1,0 +1,7 @@
+---
+# handlers file for roles/vlan
+
+- name: restart network
+  systemd:
+    name: network
+    state: restarted

@@ -1,0 +1,11 @@
+---
+# tasks file for roles/lacp
+    
+- name: Device ifcfg bond0
+  template:
+    backup: true
+    owner: root
+    group: root
+    src: ifcfg-bond0.j2
+    dest: /etc/sysconfig/network-scripts/ifcfg-{{ device_lacp }}
+  notify: restart network

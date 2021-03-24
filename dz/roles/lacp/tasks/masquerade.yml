@@ -1,0 +1,24 @@
+---
+# tasks file for roles/lacp
+
+- name: Create iptables NAT chain
+  iptables:
+    table: nat
+    chain: POSTROUTING
+    out_interface: 'eth0'
+    jump: MASQUERADE
+    protocol: 'all'
+    state: present
+  notify: save iptables
+
+- name: Auto start iptables NAT
+  lineinfile:
+    path: /etc/rc.d/rc.local
+    regexp: '^/sbin/iptables-restore'
+    line: /sbin/iptables-restore < /etc/sysconfig/iptables
+    mode: '+x'
+    
+- name: start network
+  systemd:
+    name: network
+    state: restarted

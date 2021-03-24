@@ -1,0 +1,11 @@
+---
+# tasks file for roles/vlan
+    
+- name: Device ifcfg vlan
+  template:
+    backup: true
+    owner: root
+    group: root
+    src: ifcfg-vlan.j2
+    dest: /etc/sysconfig/network-scripts/ifcfg-vlan{{ vlan }}
+  notify: restart network

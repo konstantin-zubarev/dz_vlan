@@ -1,0 +1,24 @@
+---
+# tasks file for roles/lacp
+
+- name: Set timezone to Europe/Moscow
+  timezone:
+    name: Europe/Moscow
+
+- name: Set ip forwarding
+  include_tasks: forwarding.yml
+  when: ansible_hostname == 'inetRouter'
+  
+- name: Set ip masquerade
+  include_tasks: masquerade.yml
+  when: ansible_hostname == 'inetRouter'
+
+- name: eth1-eth2
+  include_tasks: eth1-2.yml
+  
+- name: bond0
+  include_tasks: bond0.yml
+
+- name: Remove default route
+  include_tasks: eth0.yml
+  when: ansible_hostname == 'centralRouter'

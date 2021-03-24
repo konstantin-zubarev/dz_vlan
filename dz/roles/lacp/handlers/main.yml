@@ -1,0 +1,10 @@
+---
+# handlers file for roles/lacp
+
+- name: save iptables
+  shell: iptables-save > /etc/sysconfig/iptables
+
+- name: restart network
+  systemd:
+    name: network
+    state: restarted

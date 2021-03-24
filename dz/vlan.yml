@@ -1,0 +1,13 @@
+---
+
+- name: Configuration networs
+  hosts: vlan
+  become: true
+  roles:
+    - vlan
+
+- name: Configuration networs
+  hosts: lacp
+  become: true
+  roles:
+    - lacp

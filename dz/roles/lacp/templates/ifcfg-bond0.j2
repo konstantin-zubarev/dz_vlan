@@ -1,0 +1,12 @@
+ONBOOT=yes
+TYPE=Bond
+BONDING_MASTER=yes
+NAME=bond0
+DEVICE={{ device_lacp }}
+BONDING_OPTS="mode=1 miimon=100 fail_over_mac=1"
+NM_CONTROLLED=no
+USERCTL=no
+BOOTPROTO=static
+IPADDR={{ vlan_lacp_ip }}
+NETMASK={{ vlan_lacp_netmask }}
+GATEWAY={{ vlan_lacp_gateway }}

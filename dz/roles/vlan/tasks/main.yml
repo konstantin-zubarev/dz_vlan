@@ -1,0 +1,12 @@
+---
+# tasks file for roles/vlan
+
+- name: Set timezone to Europe/Moscow
+  timezone:
+    name: Europe/Moscow
+
+- name: VLAN
+  include_tasks: vlan.yml
+
+- name: Remove default route
+  include_tasks: eth0.yml
